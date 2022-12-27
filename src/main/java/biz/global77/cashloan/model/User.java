@@ -15,8 +15,7 @@ public class User {
 
     private String password;
 
-    public User() {
-    }
+    private String fullName;
 
     public int getUserID() {
         return user_id;
@@ -48,6 +47,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public User() {
+    }
+
+    public User(String fullName) {
+        this.fullName = fullName;
     }
 
     public User(String username, String password) {
