@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/flowbite@1.5.4/dist/flowbite.min.css"/>
+  <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.js"></script>
+  <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+  <script
+          src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <title>Access Denied</title>
+</head>
+<body>
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+  <div class="container flex justify-center m-4 mx-auto">
+    <p class="text-6xl text-[#F85C5D] font-bold">Access Denied</p><br/>
+  </div>
+  <div class="container text-[#101010] flex justify-center m-4 mx-auto">
+    <p class="text-4xl font-bold" >Oops!</p><br/>
+  </div>
+  <div class="container flex justify-center m-4 mx-auto">
+    <p>
+      <button class="bg-slate-400 px-4 py-1 text-white ml-2 mt-2 mb-4 rounded">
+            <span class="justify-center ">
+            <a th:href="@{/dashboard}">Go back to Dashboard</a></span>
+
+      </button>
+    </p>
+  </div>
+</div>
+</div>
+
+</body>
+</html>
