@@ -21,4 +21,9 @@ public class MainController {
     public String notFound() {
         return "notfound";
     }
+
+    @GetMapping("/login")
+    public String viewLoginPage() {
+        return "login";
+    }
 }

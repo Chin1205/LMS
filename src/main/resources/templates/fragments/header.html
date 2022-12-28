@@ -60,7 +60,11 @@
                   </li>
                 </ul>
                 <div class="py-1">
-                  <a th:href="@{/logout}" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Sign out</a>
+                  <form method="post" th:action="@{/logout}">
+                    <button type="submit">
+                      <a class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Sign out</a>
+                    </button>
+                  </form>
                 </div>
               </div>
             </li>

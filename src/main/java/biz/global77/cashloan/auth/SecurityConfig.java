@@ -45,12 +45,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/page/lender").hasRole("LENDER")
                 .antMatchers("/page/borrower").hasRole("BORROWER")
                 .and()
+                .exceptionHandling().accessDeniedPage("/access-denied")
+                .and()
                 .formLogin()
-                .defaultSuccessUrl("/dashboard").permitAll()
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/dashboard")
+                .permitAll()
                 .and()
-                .logout()
-                .and()
-                .exceptionHandling().accessDeniedPage("/access-denied");
+                .logout().logoutSuccessUrl("/login").permitAll();
+
 
 
     }
