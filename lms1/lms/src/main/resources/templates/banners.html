@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/" style="font-size: 20px; text-decoration:underline">HOME</a>
+<br/>
+<br/>
+<h6>List of Displayed Banners</h6>
+<br/>
+<table class="items-center w-full bg-transparent border-collapse">
+    <thead>
+    <tr>
+        <th
+                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">ID</th>
+        <th
+                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">Content Type</th>
+        <th
+                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">File Name
+        </th>
+        <th
+                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">Image</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="bg-sky-200 text-center text-black"
+        th:each="image : ${image}">
+
+        <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 font-medium text-xs whitespace-nowrap p-4"
+                th:text="${image.id}"></td>
+        <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 font-medium text-xs whitespace-nowrap p-4"
+                th:text="${image.contentType}"></td>
+        <td
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 font-medium text-xs whitespace-nowrap p-4"
+                th:text="${image.fileName}"></td>
+        <td>
+            <img src="/image/{id}" alt="Image" >
+                </td>
+    </tbody>
+</table>
+</body>
+</html>
