@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Archive Courses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.4/tailwind.min.css">
+</head>
+<body class="bg-gray-100 h-screen font-sans">
+
+<div class="container mx-auto mt-5">
+    <h1 class="text-center mb-20 font-bold text-3xl">Archive Courses</h1>
+
+    <table class="table-auto w-full">
+        <thead>
+        <tr class="text-center">
+            <th class="border-2 px-4 py-2">Name</th>
+            <th class="border-2 px-4 py-2">Level</th>
+            <th class="border-2 px-4 py-2">With Bond</th>
+            <th class="border-2 px-4 py-2">Description</th>
+            <th class="border-2 px-4 py-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}" th:if="${course.archived}" class="text-center">
+            <td class="border px-4 py-2" th:text="${course.name}"></td>
+            <td class="border px-4 py-2" th:text="${course.level}"></td>
+            <td class="border px-4 py-2" th:text="${course.withBond}"></td>
+            <td class="border px-4 py-2" th:text="${course.description}"></td>
+            <td class="border px-4 py-2">
+                <form th:action="@{/courses/enable/{id}(id=${course.id})}" method="post">
+                    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enable</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="flex justify-center py-4" >
+    <a href="/courses" class="bg-blue-500 px-4 py-2 rounded-full text-white font-bold" >Back to Courses</a>
+</div>
+
+</body>
+</html>

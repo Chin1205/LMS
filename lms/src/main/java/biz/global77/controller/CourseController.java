@@ -2,67 +2,71 @@ package biz.global77.controller;
 
 import biz.global77.model.Course;
 import biz.global77.service.CourseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/courses")
 public class CourseController {
-    @Autowired
-    private CourseService courseService;
+    private final CourseService courseService;
 
-    @GetMapping
-    public ModelAndView findAll() {
-        List<Course> courses = courseService.findAll();
-        ModelAndView mav = new ModelAndView("courses");
-        mav.addObject("courses", courses);
-        return mav;
+    public CourseController(CourseService courseService) {
+        this.courseService = courseService;
     }
 
-    @GetMapping("/{id}")
-    public ModelAndView findById(@PathVariable int id) {
-        Course course = courseService.findById(id);
-        ModelAndView mav = new ModelAndView("course");
-        mav.addObject("course", course);
-        return mav;
+    @GetMapping
+    public ModelAndView listCourses() {
+        ModelAndView modelAndView = new ModelAndView("courses");
+        modelAndView.addObject("courses", courseService.getAllCourses());
+        return modelAndView;
     }
 
     @GetMapping("/add")
-    public ModelAndView addForm() {
-        ModelAndView mav = new ModelAndView("addCourse");
-        mav.addObject("course", new Course());
-        return mav;
+    public ModelAndView addCourseForm(Course course) {
+        return new ModelAndView("add_course", "course", course);
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute Course course) {
-        courseService.save(course);
+    public String addCourse(Course course) {
+        courseService.addCourse(course);
         return "redirect:/courses";
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView editForm(@PathVariable int id) {
-        Course course = courseService.findById(id);
-        ModelAndView mav = new ModelAndView("editCourse");
-        mav.addObject("course", course);
-        return mav;
+    public ModelAndView editCourseForm(@PathVariable long id) {
+        ModelAndView modelAndView = new ModelAndView("edit_course");
+        modelAndView.addObject("course", courseService.getCourseById(id));
+        return modelAndView;
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable int id, @ModelAttribute Course course) {
+    public String editCourse(@PathVariable long id, Course course) {
         course.setId(id);
-        courseService.save(course);
+        courseService.updateCourse(course);
         return "redirect:/courses";
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
-        courseService.delete(id);
+    @PostMapping("/archive/{id}")
+    public String archiveCourse(@PathVariable long id) {
+        courseService.archiveCourse(id);
         return "redirect:/courses";
     }
 
+    @GetMapping("/archive")
+    public ModelAndView listArchiveCourses() {
+        ModelAndView modelAndView = new ModelAndView("archive_courses");
+        modelAndView.addObject("courses", courseService.getArchiveCourses());
+        return modelAndView;
+    }
+
+    @PostMapping("/enable/{id}")
+    public String enableCourse(@PathVariable long id) {
+        courseService.enableCourse(id);
+        return "redirect:/courses/archive";
+    }
 }

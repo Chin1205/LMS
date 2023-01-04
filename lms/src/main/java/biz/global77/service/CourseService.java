@@ -5,9 +5,11 @@ import biz.global77.model.Course;
 import java.util.List;
 
 public interface CourseService {
-    List<Course> findAll();
-    Course findById(int id);
-    Course save(Course course);
-    void delete(int id);
+    List<Course> getAllCourses();
+    Course getCourseById(long id);
+    void addCourse(Course course);
+    void updateCourse(Course course);
+    void archiveCourse(long id);
+    List<Course> getArchiveCourses();
+    void enableCourse(long id);
 }
-

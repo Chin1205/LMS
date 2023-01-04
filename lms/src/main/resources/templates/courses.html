@@ -6,11 +6,14 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 h-screen font-sans">
+
 <div class="container mx-auto mt-5">
     <h1 class="text-center mb-5 font-bold text-3xl">Courses</h1>
+
     <div class="text-right mb-5">
         <a href="/courses/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add</a>
     </div>
+
     <table class="table-auto w-full">
         <thead>
         <tr class="text-center">
@@ -31,7 +34,7 @@
             <td class="border px-4 py-2" th:text="${course.withBond}"></td>
             <td class="border px-4 py-2">
                 <a th:href="@{/courses/edit/{id}(id=${course.id})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Edit</a>
-                <form th:action="@{/courses/delete/{id}(id=${course.id})}" method="get" class="inline-block">
+                <form th:action="@{/courses/archive/{id}(id=${course.id})}" method="post" class="inline-block">
                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
                 </form>
             </td>
@@ -39,6 +42,12 @@
         </tbody>
     </table>
 </div>
+
+<div class="flex justify-center py-4">
+    <a href="/courses/archive" class="bg-blue-500 px-4 py-2 rounded-full text-white font-bold">Show Archive Courses</a>
+</div>
+
+
 </body>
 </html>
 

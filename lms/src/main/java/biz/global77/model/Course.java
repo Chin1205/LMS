@@ -1,74 +1,34 @@
 package biz.global77.model;
 
+import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "courses")
+@Data
 public class Course {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Size(max = 255)
     private String name;
 
-    @Column(name = "description")
+    @Size(max = 255)
     private String description;
 
-    @Column(name = "level")
+    @NotNull
+    @Size(max = 20)
     private String level;
 
-    @Column(name = "with_bond")
+    @NotNull
     private boolean withBond;
 
-    public Course() {}
+    @NotNull
+    private boolean archived;
 
-    public Course(int id, String name, String description, String level, boolean withBond) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.level = level;
-        this.withBond = withBond;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getLevel() {
-        return this.level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public boolean isWithBond() {
-        return this.withBond;
-    }
-
-    public void setWithBond(boolean withBond) {
-        this.withBond = withBond;
-    }
 }
 

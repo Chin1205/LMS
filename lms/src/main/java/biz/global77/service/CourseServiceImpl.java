@@ -2,34 +2,57 @@ package biz.global77.service;
 
 import biz.global77.model.Course;
 import biz.global77.repository.CourseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import biz.global77.controller.ResourceNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CourseServiceImpl implements CourseService {
-    @Autowired
-    private CourseRepository courseRepository;
+    private final CourseRepository courseRepository;
 
-    @Override
-    public List<Course> findAll() {
-        return courseRepository.findAll();
+    public CourseServiceImpl(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
     }
 
     @Override
-    public Course findById(int id) {
-        return courseRepository.findById(id).orElse(null);
+    public List<Course> getAllCourses() {
+        return courseRepository.findByArchivedFalse();
     }
 
     @Override
-    public Course save(Course course) {
-        return courseRepository.save(course);
+    public Course getCourseById(long id) {
+        return courseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
-    public void delete(int id) {
-        courseRepository.deleteById(id);
+    public void addCourse(Course course) {
+        courseRepository.save(course);
+    }
+
+    @Override
+    public void updateCourse(Course course) {
+        courseRepository.save(course);
+    }
+
+
+    @Override
+    public void archiveCourse(long id) {
+        Course course = courseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        course.setArchived(true);
+        courseRepository.save(course);
+    }
+
+    @Override
+    public List<Course> getArchiveCourses() {
+        return courseRepository.findByArchivedTrue();
+    }
+
+    @Override
+    public void enableCourse(long id) {
+        Course course = courseRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        course.setArchived(false);
+        courseRepository.save(course);
     }
 }
-
