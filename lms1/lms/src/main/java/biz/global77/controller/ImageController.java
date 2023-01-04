@@ -1,9 +1,11 @@
-package biz.global77.com.lms.controller;
+package biz.global77.controller;
 
-import biz.global77.com.lms.model.Image;
-import biz.global77.com.lms.repository.ImageRepository;
-import biz.global77.com.lms.service.ImageService;
+import biz.global77.model.Image;
+import biz.global77.repository.ImageRepository;
+import biz.global77.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -17,14 +19,16 @@ import org.springframework.http.ResponseEntity;
 
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 public class ImageController {
+
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/lms2";
+    private static final String DB_USER = "postgres";
+    private static final String DB_PASSWORD = "nTp2019feb27*";
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
@@ -62,19 +66,31 @@ public class ImageController {
         return "upload_successful";
     }
 
+//    @GetMapping("/image/{id}")
+//    public byte[] getImage(@PathVariable Long id) {
+//        byte[] imageData = null;
+//        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+//            String sql = "SELECT data FROM image WHERE id = ?";
+//            PreparedStatement statement = conn.prepareStatement(sql);
+//            statement.setLong(1, id);
+//            ResultSet resultSet = statement.executeQuery();
+//            if (resultSet.next()) {
+//                imageData = resultSet.getBytes("data");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return imageData;
+//    }
     @GetMapping("/image/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
-        String sql = "SELECT content_type, data FROM image WHERE id = ?";
-        Image image = jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> {
-            Image img = new Image();
-            img.setContentType(rs.getString("content_type"));
-            img.setData(rs.getBytes("data"));
-            return img;
-        });
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id) {
+        // Retrieve image from database based on id
+        byte[] image = imageService.getImage(id).getData();
 
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(image.getContentType()))
-                .body(image.getData());
+        // Set the content type and return the image in the response
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_PNG);
+        return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
 
     @GetMapping("/banners")
