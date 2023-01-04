@@ -1,4 +1,4 @@
-package biz.global77.com.lms;
+package biz.global77;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
