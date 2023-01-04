@@ -1,4 +1,4 @@
-package biz.global77.com.lms;
+package biz.global77;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

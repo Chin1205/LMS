@@ -1,14 +1,14 @@
-package biz.global77.com.lms.service;
+package biz.global77.service;
 
-import biz.global77.com.lms.model.Image;
-import biz.global77.com.lms.repository.ImageRepository;
+import biz.global77.model.Image;
+import biz.global77.repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ImageService {
-
+    @Autowired
     private ImageRepository imageRepository;
 
     @Autowired
@@ -20,7 +20,7 @@ public class ImageService {
     public void saveImage(Image image) {
         imageRepository.save(image);
     }
-
+    @Transactional
     public Image getImage(Long id) {
         return imageRepository.findById(id).orElse(null);
     }

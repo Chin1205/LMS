@@ -1,4 +1,4 @@
-package biz.global77.com.lms.model;
+package biz.global77.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

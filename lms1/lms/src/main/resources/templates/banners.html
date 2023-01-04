@@ -18,12 +18,20 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>Title</title>
 </head>
+<!--<script>-->
+<!--function viewImage(id) {-->
+<!--// Update the src attribute of the image to the /image/{id} URL-->
+<!--document.getElementById("myImage").src = `/image/${id}`;-->
+<!--}-->
+<!--</script>-->
 <body>
 
-<a href="/" style="font-size: 20px; text-decoration:underline">HOME</a>
+<a href="/" style="font-size: 20px; text-decoration:underline">HOME</a>&nbsp; &nbsp; &nbsp;
+<a href="/banners" style="font-size: 20px; text-decoration:underline">Banners</a>
 <br/>
 <br/>
-<h6>List of Displayed Banners</h6>
+<h4>List of Displayed Banners</h4>
+<br/>
 <br/>
 <table class="items-center w-full bg-transparent border-collapse">
     <thead>
@@ -31,12 +39,12 @@
         <th
                 class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">ID</th>
         <th
-                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">Content Type</th>
+                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">File Name</th>
         <th
-                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">File Name
+                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">Image Type
         </th>
         <th
-                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">Image</th>
+                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">Action</th>
     </tr>
     </thead>
 
@@ -49,12 +57,10 @@
                 th:text="${image.id}"></td>
         <td
                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 font-medium text-xs whitespace-nowrap p-4"
-                th:text="${image.contentType}"></td>
-        <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 font-medium text-xs whitespace-nowrap p-4"
                 th:text="${image.fileName}"></td>
         <td>
-            <img src="/image/{id}" alt="Image" >
+        <td>
+<!--        <img src="image/{id}">-->
                 </td>
     </tbody>
 </table>

@@ -1,6 +1,6 @@
-package biz.global77.com.lms.repository;
+package biz.global77.repository;
 
-import biz.global77.com.lms.model.Image;
+import biz.global77.model.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
