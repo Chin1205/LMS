@@ -13,14 +13,15 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
+    @NotBlank
     @Size(max = 255)
     private String name;
 
-    @Size(max = 255)
+    @NotBlank
+    @Size(max = 1000)
     private String description;
 
-    @NotNull
+    @NotBlank
     @Size(max = 20)
     private String level;
 
