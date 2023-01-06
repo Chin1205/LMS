@@ -21,7 +21,7 @@
     <td th:text="${certificate.courseTitle}" class="text-blue-600"></td>
     <td th:text="${certificate.completionDate}" class="text-blue-600"></td>
     <td>
-      <a th:href="@{/certificates/{id}/edit(id=${certificate.id})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      <a th:href="@{/certificates/edit/{id}(id=${certificate.id})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Edit
       </a>
       <form th:action="@{/certificates/{id}(id=${certificate.id})}" th:method="delete" style="display: inline-block">

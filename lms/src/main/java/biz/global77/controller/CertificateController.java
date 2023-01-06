@@ -3,6 +3,7 @@ package biz.global77.controller;
 import biz.global77.model.Certificate;
 import biz.global77.model.Course;
 import biz.global77.service.CertificateService;
+import biz.global77.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,6 @@ public class CertificateController {
         mav.addObject("certificates", certificates);
         return mav;
     }
-
 
     @GetMapping("/{id}")
     public ModelAndView findById(@PathVariable int id) {
