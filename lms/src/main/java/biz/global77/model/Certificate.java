@@ -10,9 +10,10 @@ public class Certificate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_name")
-    private String userName;
-
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "first_name")
+    private String firstName;
     @Column(name = "course_title")
     private String courseTitle;
 
@@ -21,8 +22,11 @@ public class Certificate {
 
     public Certificate() {}
 
-    public Certificate(String userName, String courseTitle, String completionDate) {
-        this.userName = userName;
+
+
+    public Certificate(String lastName, String firstName, String courseTitle, String completionDate) {
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.courseTitle = courseTitle;
         this.completionDate = completionDate;
     }
@@ -35,12 +39,20 @@ public class Certificate {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getCourseTitle() {

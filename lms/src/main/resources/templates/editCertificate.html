@@ -53,8 +53,12 @@
   <form method="post" action="/certificates/edit" th:object="${certificate}" th:action="@{/certificates/edit/{id}(id=${certificate.id})}">
     <input type="hidden" th:field="*{id}"/>
     <div class="mb-5">
-      <label class="block font-bold mb-2 text-lg" for="userName">Name</label>
-      <input class="border rounded w-full py-2 px-3" id="userName" type="text" th:field="*{userName}" placeholder="User Name">
+      <label class="block font-bold mb-2 text-lg" for="lastName">Last Name</label>
+      <input class="border rounded w-full py-2 px-3" id="lastName" type="text" th:field="*{lastName}" placeholder="Last Name">
+    </div>
+    <div class="mb-5">
+      <label class="block font-bold mb-2 text-lg" for="firstName">First Name</label>
+      <input class="border rounded w-full py-2 px-3" id="firstName" type="text" th:field="*{firstName}" placeholder="First Name">
     </div>
     <div class="mb-5">
       <label class="block font-bold mb-2 text-lg" for="courseTitle">Course Title</label>
@@ -66,6 +70,9 @@
     </div>
     <div class="text-center mt-5">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Save</button>
+    </div>
+    <div class="text-center mt-5">
+      <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-full" href="/certificates">Cancel</button>
     </div>
   </form>
 </div>
