@@ -55,4 +55,10 @@ public class CourseServiceImpl implements CourseService {
         course.setArchived(false);
         courseRepository.save(course);
     }
+
+    @Override
+    public Course getCourse(Long id) {
+        return courseRepository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
 }

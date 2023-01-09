@@ -12,4 +12,5 @@ public interface CourseService {
     void archiveCourse(long id);
     List<Course> getArchiveCourses();
     void enableCourse(long id);
+    Course getCourse(Long id);
 }

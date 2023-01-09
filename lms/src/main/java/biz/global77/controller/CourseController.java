@@ -58,12 +58,6 @@ public class CourseController {
         return "redirect:/courses";
     }
 
-//    @PostMapping("/archive/{id}")
-//    public String archiveCourse(@PathVariable long id) {
-//        courseService.archiveCourse(id);
-//        return "redirect:/courses";
-//    }
-
     @PostMapping("/archive/{id}")
     public ModelAndView archiveCourse(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView();
@@ -83,5 +77,11 @@ public class CourseController {
     public String enableCourse(@PathVariable long id) {
         courseService.enableCourse(id);
         return "redirect:/courses/archive";
+    }
+
+    @GetMapping("/{id}")
+    public String getCourse(@PathVariable Long id, Model model) {
+        model.addAttribute("course", courseService.getCourse(id));
+        return "course";
     }
 }
