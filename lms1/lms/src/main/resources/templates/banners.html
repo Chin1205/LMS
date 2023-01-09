@@ -1,68 +1,49 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/dist/output.css" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <title>Title</title>
+  <title>Banners</title>
 </head>
-<!--<script>-->
-<!--function viewImage(id) {-->
-<!--// Update the src attribute of the image to the /image/{id} URL-->
-<!--document.getElementById("myImage").src = `/image/${id}`;-->
-<!--}-->
-<!--</script>-->
 <body>
+<h2>Banners</h2>
+<<!-- banners.html -->
+<h4>Add Banner</h4>
+<form th:action="@{/banners/add}" method="post" enctype="multipart/form-data">
+  <label for="file">Image:</label>
+  <input type="file" id="file" name="file" required>
+  <br>
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title" required>
+  <br>
+  <label for="description">Description:</label>
+  <input type="text" id="description" name="description">
+  <br>
+  <button type="submit">Add</button>
+</form>
+<br/>
+<!-- banners.html -->
 
-<a href="/" style="font-size: 20px; text-decoration:underline">HOME</a>&nbsp; &nbsp; &nbsp;
-<a href="/banners" style="font-size: 20px; text-decoration:underline">Banners</a>
-<br/>
-<br/>
-<h4>List of Displayed Banners</h4>
-<br/>
-<br/>
-<table class="items-center w-full bg-transparent border-collapse">
-    <thead>
-    <tr>
-        <th
-                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">ID</th>
-        <th
-                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">File Name</th>
-        <th
-                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">Image Type
-        </th>
-        <th
-                class="px-6 align-middle border border-solid py-3 text-normal text-center uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-sky-500 text-white">Action</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr class="bg-sky-200 text-center text-black"
-        th:each="image : ${image}">
-
-        <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 font-medium text-xs whitespace-nowrap p-4"
-                th:text="${image.id}"></td>
-        <td
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 font-medium text-xs whitespace-nowrap p-4"
-                th:text="${image.fileName}"></td>
-        <td>
-        <td>
-        <img src="image/{id}">
-                </td>
-    </tbody>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Image</th>
+    <th>Description</th>
+    <th>Action</th>
+  </tr>
+  <tr th:each="banner : ${banners}">
+    <td th:text="${banner.title}">Banner title</td>
+    <td><img th:src="'data:image/jpeg;base64,' + ${banner.image}" alt="Banner image"></td>
+    <td th:text="${banner.description}">Banner description</td>
+    <td>
+      <!-- Edit button -->
+      <a th:href="@{/banners/{id}/edit(id=${banner.id})}">
+        <button>Edit</button>
+      </a>
+      <!-- Delete button -->
+      <form th:action="@{/banners/{id}(id=${banner.id})}" th:method="delete">
+        <button>Delete</button>
+      </form>
+    </td>
+  </tr>
 </table>
 </body>
 </html>

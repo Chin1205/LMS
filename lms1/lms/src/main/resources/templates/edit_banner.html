@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- edit_banner.html -->
+
+<form th:action="@{/banners/{id}/edit(id=${banner.id})}" th:object="${banner}" method="post">
+  <label>Title: <input type="text" th:field="*{title}" /></label>
+  <br />
+  <label>Description: <textarea th:field="*{description}"></textarea></label>
+  <br />
+  <label>Image: <input type="file" name="image" /></label>
+  <br />
+  <button type="submit">Save</button>
+</form>
+
+</body>
+</html>

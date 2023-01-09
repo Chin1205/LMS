@@ -1,0 +1,81 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form class="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-xl" action="/certificates/edit/" th:object="${certificate}" th:action="@{/certificates/edit/{id}(id=${certificate.id})}">-->
+<!--  <div class="flex flex-wrap -mx-3 mb-6">-->
+<!--    <div class="w-full px-3 mb-6 md:mb-0">-->
+<!--      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="userName">-->
+<!--        User Name-->
+<!--      </label>-->
+<!--      <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="userName" type="text" th:field="*{userName}" placeholder="User Name">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="flex flex-wrap -mx-3 mb-6">-->
+<!--    <div class="w-full px-3">-->
+<!--      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="courseTitle">-->
+<!--        Course Title-->
+<!--      </label>-->
+<!--      <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="courseTitle" type="text" th:field="*{courseTitle}">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="flex flex-wrap -mx-3 mb-6">-->
+<!--    <div class="w-full px-3">-->
+<!--      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="completionDate">-->
+<!--        Completion Date-->
+<!--      </label>-->
+<!--      <input class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="completionDate" type="date" th:field="*{completionDate}">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="flex items-center justify-between">-->
+<!--    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">-->
+<!--      Save Changes-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 h-screen font-sans">
+<div class="container mx-auto mt-5">
+  <h1 class="text-center mb-5 font-bold text-3xl">Edit Certificate</h1>
+  <form method="post" action="/certificates/edit" th:object="${certificate}" th:action="@{/certificates/edit/{id}(id=${certificate.id})}">
+    <input type="hidden" th:field="*{id}"/>
+    <div class="mb-5">
+      <label class="block font-bold mb-2 text-lg" for="lastName">Last Name</label>
+      <input class="border rounded w-full py-2 px-3" id="lastName" type="text" th:field="*{lastName}" placeholder="Last Name">
+    </div>
+    <div class="mb-5">
+      <label class="block font-bold mb-2 text-lg" for="firstName">First Name</label>
+      <input class="border rounded w-full py-2 px-3" id="firstName" type="text" th:field="*{firstName}" placeholder="First Name">
+    </div>
+    <div class="mb-5">
+      <label class="block font-bold mb-2 text-lg" for="courseTitle">Course Title</label>
+      <input class="border rounded w-full py-2 px-3" id="courseTitle" type="text" th:field="*{courseTitle}" placeholder="Course Title">
+    </div>
+    <div class="mb-5">
+      <label class="block font-bold mb-2 text-lg" for="completionDate">Completion Date</label>
+      <input class="border rounded w-full py-2 px-3" id="completionDate" type="text" th:field="*{completionDate}" placeholder="Completion Date">
+    </div>
+    <div class="text-center mt-5">
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Save</button>
+    </div>
+    <div class="text-center mt-5">
+      <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-full" href="/certificates">Cancel</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
+

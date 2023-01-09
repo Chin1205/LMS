@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Banner</title>
+</head>
+<body>
+<!-- banner.html -->
+
+<!-- banner image -->
+<img th:src="'data:image/jpeg;base64,' + ${banner.image}" alt="Banner image">
+
+<!-- banner title -->
+<h1 th:text="${banner.title}">Banner title</h1>
+
+<!-- banner description -->
+<p th:text="${banner.description}">Banner description</p>
+
+<!-- Previous button -->
+<a th:href="@{/banners/{id}(id=${banner.id - 1})}" th:if="${banner.id > 1}">
+    <button>Previous</button>
+</a>
+<span th:if="${banner.id == 1}">First banner</span>
+
+<!-- Next button -->
+<a th:href="@{/banners/{id}(id=${banner.id + 1})}" th:if="${banner.id < 5}">
+    <button>Next</button>
+</a>
+<span th:if="${banner.id == 5}">Last banner</span>
+
+</body>
+</html>
