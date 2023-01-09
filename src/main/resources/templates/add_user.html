@@ -60,7 +60,7 @@
       <label class="block font-bold mb-2 text-lg" for="birthday">Birthday</label>
       <input class="border rounded w-full py-2 px-3" id="birthday" type="date" th:field="*{birthday}" placeholder="Description">
       <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-500 text-xs italic"></p>
-    </div>
+    </div> <!--try-->
 
     <div class="mb-5">
       <label class="block font-bold mb-2 text-lg" for="level">Level</label>
