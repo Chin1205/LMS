@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Course</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 h-screen font-sans">
+<div class="container mx-auto mt-5">
+    <h1 class="text-center mb-5 font-bold text-3xl">Add Course</h1>
+    <form th:action="@{/courses/add}" th:object="${course}" method="post">
+        <div class="mb-5">
+            <label class="block font-bold mb-2 text-lg" for="name">Name</label>
+            <input class="border rounded w-full py-2 px-3" id="name" type="text" th:field="*{name}" placeholder="Name">
+        </div>
+        <div class="mb-5">
+            <label class="block font-bold mb-2 text-lg" for="description">Description</label>
+            <input class="border rounded w-full py-2 px-3" id="description" type="text" th:field="*{description}" placeholder="Description">
+        </div>
+        <div class="mb-5">
+            <label class="block font-bold mb-2 text-lg" for="level">Level</label>
+            <input class="border rounded w-full py-2 px-3" id="level" type="text" th:field="*{level}" placeholder="Level">
+        </div>
+        <div class="mb-5">
+            <label class="inline-flex items-center" for="withBond">
+                <input class="form-checkbox" type="checkbox" id="withBond" th:field="*{withBond}" value="true">
+                <span class="ml-2">With Bond</span>
+            </label>
+        </div>
+        <div class="text-center mt-5">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Add</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
