@@ -2,6 +2,7 @@ package biz.global77.controller;
 
 import biz.global77.model.Course;
 import biz.global77.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,11 +18,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/courses")
 public class CourseController {
-    private final CourseService courseService;
 
-    public CourseController(CourseService courseService) {
-        this.courseService = courseService;
-    }
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping
     public ModelAndView listCourses() {
@@ -59,10 +58,18 @@ public class CourseController {
         return "redirect:/courses";
     }
 
+//    @PostMapping("/archive/{id}")
+//    public String archiveCourse(@PathVariable long id) {
+//        courseService.archiveCourse(id);
+//        return "redirect:/courses";
+//    }
+
     @PostMapping("/archive/{id}")
-    public String archiveCourse(@PathVariable long id) {
+    public ModelAndView archiveCourse(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView();
         courseService.archiveCourse(id);
-        return "redirect:/courses";
+        mav.setViewName("redirect:/courses");
+        return mav;
     }
 
     @GetMapping("/archive")

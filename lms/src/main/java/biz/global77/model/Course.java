@@ -13,16 +13,16 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
-    @Size(max = 255)
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name must be 100 characters or fewer")
     private String name;
 
-    @NotBlank
-    @Size(max = 1000)
+    @NotBlank(message = "Description is required")
+    @Size(max = 1000, message = "Description must be 1000 characters or fewer")
     private String description;
 
-    @NotBlank
-    @Size(max = 20)
+    @NotBlank(message = "Level is required")
+    @Size(max = 50, message = "Level must be 50 characters or fewer")
     private String level;
 
     @NotNull
