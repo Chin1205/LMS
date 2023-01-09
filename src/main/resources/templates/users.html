@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Users</title>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 h-screen font-sans">
+
+<div class="container mx-auto mt-5 flex justify-center flex-wrap content-around flex-col">
+  <h1 class="text-center mb-5 font-bold text-3xl">Users</h1>
+
+  <div class="text-right mb-5">
+    <a href="/users/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add</a>
+  </div>
+
+  <table class="table-auto w-10/12">
+    <thead>
+    <tr class="text-center">
+      <th class="border-2 px-4 py-2">Employee ID</th>
+      <th class="border-2 px-4 py-2">First Name</th>
+      <th class="border-2 px-4 py-2">Last Name</th>
+      <th class="border-2 px-4 py-2">Department ID</th>
+      <th class="border-2 px-4 py-2">Role</th>
+      <th class="border-2 px-4 py-2">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" th:each="user : ${users}">
+      <td class="border px-4 py-2">
+        <a th:href="@{/users/{id}(id=${user.id})}" th:text="${user.userId}"></a>
+      </td>
+      <td class="border px-4 py-2" th:text="${user.firstName}"></td>
+      <td class="border px-4 py-2" th:text="${user.lastName}"></td>
+      <td class="border px-4 py-2" th:text="${user.departmentId}"></td>
+      <td class="border px-4 py-2" th:text="${user.role}"></td>
+      <td class="border px-4 py-2" th:text="${user.isDeactivated}"></td>
+      <td class="border px-4 py-2">
+        <a th:href="@{/users/edit/{id}(id=${user.id})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Edit</a>
+        <form th:action="@{/users/activate/{id}(id=${user.id})}" method="post" class="inline-block">
+          <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Deactivate</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
