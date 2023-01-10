@@ -6,9 +6,10 @@
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 h-screen font-sans">
-<div class="container mx-auto mt-5">
+<div class="container mx-auto mt-5 flex justify-center flex-wrap content-around flex-col">
   <h1 class="text-center mb-5 font-bold text-3xl">Edit Request</h1>
-  <form method="post" action="/budgetrequest/edit" th:object="${budgetrequest}" th:action="@{/budgetrequest/edit/{id}(id=${budgetrequest.id})}">
+  <form class="table-auto w-1/3" method="post" action="/budgetrequest/edit"
+        th:object="${budgetrequest}" th:action="@{/budgetrequest/edit/{id}(id=${budgetrequest.id})}">
     <input type="hidden" th:field="*{id}"/>
     <div class="mb-5">
       <label class="block font-bold mb-2 text-lg" for="lengthOfStay">Length of Stay</label>
@@ -23,8 +24,8 @@
       <input class="border rounded w-full py-2 px-3" id="nameRequest" type="text" th:field="*{nameRequest}" placeholder="Name of Request">
     </div>
     <div class="mb-5">
-      <label class="inline-flex items-center" for="requestDetails">Request Details</label>
-        <textarea id="requestDetails" name="requestDetails" rows="10" cols="70" th:field="*{requestDetails}"></textarea>
+      <label class="block font-bold mb-2 text-lg" for="requestDetails">Request Details</label>
+      <input class="border rounded w-full py-2 px-3" id="requestDetails" type="text" th:field="*{requestDetails}" placeholder="Request Details">
     </div>
     <div class="text-center mt-5">
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Save</button>
@@ -33,3 +34,4 @@
 </div>
 </body>
 </html>
+

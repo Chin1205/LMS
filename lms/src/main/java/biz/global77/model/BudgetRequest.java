@@ -1,32 +1,40 @@
 package biz.global77.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "budget_request")
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class BudgetRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "length_of_stay", nullable = false)
+    @NotBlank
+    @Size(max = 10)
     private String lengthOfStay;
 
-    @Column(name = "cost_of_bond", nullable = false)
+    @NotBlank
+    @Size(max = 10)
     private String costOfBond;
 
-    @Column(name = "name_request", nullable = false)
+    @NotBlank
+    @Size(max = 50)
     private String nameRequest;
 
-    @Column(name = "request_details")
+    @NotBlank
+    @Size(max = 255)
     private String requestDetails;
+
+    @NotNull
+    private boolean archived;
 }

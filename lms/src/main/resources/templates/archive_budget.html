@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Archive Requests</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.4/tailwind.min.css">
+</head>
+<body class="bg-gray-100 h-screen font-sans">
+
+
+<div class="container mx-auto mt-5 flex justify-center flex-wrap content-around flex-col">
+    <h1 class="text-center mb-20 font-bold text-3xl">Archive Requests</h1>
+
+    <table class="table-auto w-10/12">
+        <thead>
+        <tr class="text-center">
+            <th class="border-2 px-4 py-2">Length of Stay</th>
+            <th class="border-2 px-4 py-2">Cost of Bond</th>
+            <th class="border-2 px-4 py-2">Name of Request</th>
+            <th class="border-2 px-4 py-2">Request Details</th>
+            <th class="border-2 px-4 py-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="budgetrequest : ${budgetrequest}" th:if="${budgetrequest.archived}" class="text-center">
+            <td class="border px-4 py-2" th:text="${budgetrequest.lengthOfStay}"></td>
+            <td class="border px-4 py-2" th:text="${budgetrequest.costOfBond}"></td>
+            <td class="border px-4 py-2" th:text="${budgetrequest.nameRequest}"></td>
+            <td class="border px-4 py-2" th:text="${budgetrequest.requestDetails}"></td>
+            <td class="border px-4 py-2">
+                <form th:action="@{/budgetrequest/enable/{id}(id=${budgetrequest.id})}" method="post">
+                    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enable</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="flex justify-center py-4" >
+    <a href="/budgetrequest" class="bg-blue-500 px-4 py-2 rounded-full text-white font-bold" >Back to Requests</a>
+</div>
+
+</body>
+</html>

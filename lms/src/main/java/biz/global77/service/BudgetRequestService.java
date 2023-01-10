@@ -8,6 +8,9 @@ public interface BudgetRequestService {
 
     List<BudgetRequest> findAll();
     BudgetRequest findById(int id);
-    BudgetRequest save(BudgetRequest budgetRequest);
-    void delete(int id);
+    void addBudgetRequest(BudgetRequest budgetRequest);
+    void updateBudgetRequest(BudgetRequest budgetRequest);
+    void archiveBudgetRequest(int id);
+    List<BudgetRequest> getAllArchiveBudgetRequest();
+    void enableBudgetRequest(int id);
 }

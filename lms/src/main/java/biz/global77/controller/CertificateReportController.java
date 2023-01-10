@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CertificateReportController {
-    @GetMapping ("/pdf")
-    public ResponseEntity<byte[]> generatedPdf@PathVariable String certificates) throws JRException, FileNotFoundException {
+//    @GetMapping ("/pdf")
+//    public ResponseEntity<byte[]> generatedPdf@PathVariable String certificates) throws JRException, FileNotFoundException {
 //
 //        List<Certificate> certificateList = new ArrayList<Certificate>();
 //        cer
@@ -34,7 +34,7 @@ public class CertificateReportController {
 //        headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=List_of_Certificate.pdf");
 //
 //        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
-    }
+//    }
 
 }
 

@@ -31,13 +31,18 @@
             <td class="border px-4 py-2" th:text="${budgetrequest.requestDetails}"></td>
             <td class="border px-4 py-2">
                 <a th:href="@{/budgetrequest/edit/{id}(id=${budgetrequest.id})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Edit</a>
-                <form th:action="@{/budgetrequest/delete/{id}(id=${budgetrequest.id})}" method="get" class="inline-block">
-                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
+                <form th:action="@{/budgetrequest/archive/{id}(id=${budgetrequest.id})}" method="post" class="inline-block">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Archive</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
+
+<div class="flex justify-center py-4">
+    <a href="/budgetrequest/archive" class="bg-blue-500 px-4 py-2 rounded-full text-white font-bold">Show Archive Requests</a>
+</div>
+
 </body>
 </html>

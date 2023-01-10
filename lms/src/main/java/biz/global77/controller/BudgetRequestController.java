@@ -1,70 +1,81 @@
 package biz.global77.controller;
 
 import biz.global77.model.BudgetRequest;
+import biz.global77.model.Course;
 import biz.global77.service.BudgetRequestService;
+import biz.global77.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 @RequestMapping("/budgetrequest")
 public class BudgetRequestController {
+    private final BudgetRequestService budgetRequestService;
 
-    @Autowired
-    private BudgetRequestService budgetRequestService;
-
-    @GetMapping
-    public ModelAndView findAll() {
-        List<BudgetRequest> budgetrequest = budgetRequestService.findAll();
-        ModelAndView mav = new ModelAndView("budgetrequest");
-        mav.addObject("budgetrequest", budgetrequest);
-        return mav;
+    public BudgetRequestController(BudgetRequestService budgetRequestService) {
+        this.budgetRequestService = budgetRequestService;
     }
 
-    @GetMapping("/{id}")
-    public ModelAndView findById(@PathVariable int id) {
-        BudgetRequest budgetrequest = budgetRequestService.findById(id);
-        ModelAndView mav = new ModelAndView("budgetrequest");
-        mav.addObject("budgetrequest", budgetrequest);
-        return mav;
+    @GetMapping
+    public ModelAndView listBudgetRequest() {
+        ModelAndView modelAndView = new ModelAndView("budgetrequest");
+        modelAndView.addObject("budgetrequest", budgetRequestService.findAll());
+        return modelAndView;
     }
 
     @GetMapping("/add")
-    public ModelAndView addForm() {
-        ModelAndView mav = new ModelAndView("addBudgetRequest");
-        mav.addObject("budgetrequest", new BudgetRequest());
-        return mav;
+    public ModelAndView addCourseForm(BudgetRequest budgetRequest) {
+        return new ModelAndView("addBudgetRequest", "budgetrequest", budgetRequest);
     }
 
-    @PostMapping("/add")
-    public String add(@ModelAttribute BudgetRequest budgetRequest) {
-        budgetRequestService.save(budgetRequest);
-        return "redirect:/budgetrequest";
+    @PostMapping("/add_budgetrequest")
+    public ModelAndView addBudgetRequest(@Valid BudgetRequest budgetRequest, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("addBudgetRequest");
+        }
+//        courseService.addCourse(course);
+        budgetRequestService.addBudgetRequest(budgetRequest);
+        model.addAttribute("budgetrequest", budgetRequestService.findAll());
+        return new ModelAndView("budgetrequest", "budgetRequestModel", model);
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView editForm(@PathVariable int id) {
-        BudgetRequest budgetRequest = budgetRequestService.findById(id);
-        ModelAndView mav = new ModelAndView("editBudgetRequest");
-        mav.addObject("budgetrequest", budgetRequest);
-        return mav;
+    public ModelAndView editBudgetRequestForm(@PathVariable int id) {
+        ModelAndView modelAndView = new ModelAndView("editBudgetRequest");
+        modelAndView.addObject("budgetrequest", budgetRequestService.findById(id));
+        return modelAndView;
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable int id, @ModelAttribute BudgetRequest budgetRequest) {
+    public String editBudgetRequest(@PathVariable int id, BudgetRequest budgetRequest) {
         budgetRequest.setId(id);
-        budgetRequestService.save(budgetRequest);
+        budgetRequestService.updateBudgetRequest(budgetRequest);
         return "redirect:/budgetrequest";
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable int id) {
-        budgetRequestService.delete(id);
+    @PostMapping("/archive/{id}")
+    public String archiveBudgetRequest(@PathVariable int id) {
+        budgetRequestService.archiveBudgetRequest(id);
         return "redirect:/budgetrequest";
     }
 
-    //test12321
+    @GetMapping("/archive")
+    public ModelAndView listArchiveBudgetRequest() {
+        ModelAndView modelAndView = new ModelAndView("archive_budget");
+        modelAndView.addObject("budgetrequest", budgetRequestService.getAllArchiveBudgetRequest());
+        return modelAndView;
+    }
+
+    @PostMapping("/enable/{id}")
+    public String enableBudgetRequest(@PathVariable int id) {
+        budgetRequestService.enableBudgetRequest(id);
+        return "redirect:/budgetrequest/archive";
+    }
 }
